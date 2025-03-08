@@ -65,3 +65,28 @@ CREATE TABLE laboratorio_medicamento(id
 IGN KEY (medicamento) REFERENCES medicamento(code)
 , laboratorio VARCHAR(20), FOREIGN KEY (laboratori
 o) REFERENCES laboratorio(RIF), stock INT)
+
+CREATE TABLE pedido (
+    id SERIAL PRIMARY KEY,
+    fecha DATE NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    empleado_id INT,
+    FOREIGN KEY (empleado_id) REFERENCES empleado(idEmpleado)
+);
+
+CREATE TABLE cuentas_pagar (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT,
+    sucursal_id INT,
+    monto DECIMAL(10,2) NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedido(id),
+    FOREIGN KEY (sucursal_id) REFERENCES sucursal(idsucursal)
+);
+
+CREATE TABLE compra (
+    id SERIAL PRIMARY KEY,
+    pedido_id INT,
+    fecha DATE NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedido(id)
+);
