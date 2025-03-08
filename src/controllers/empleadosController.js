@@ -65,7 +65,7 @@ import * as empleadoServices from "../services/empleadosServices.js";
 
  export const searchEmpleado = async (req, res) => {
     try {
-        const searchTerm = req.query.term; // Cambia "id" por "term"
+        const searchTerm = req.query.term; 
         const empleados = await empleadoServices.buscarEmpleado(searchTerm);
 
         if (empleados.length === 0) {

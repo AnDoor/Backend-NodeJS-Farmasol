@@ -19,7 +19,7 @@ export const createCargo = async(cargoData) =>{
 export const updateCargo = async(cargoData,idcargo) =>{
     const {nombre,descripcion} = cargoData;
     const text = 
-    'UPDATE cargo SET nombre = $1,descripcion = $2, WHERE idcargo = $4 RETURNING *';
+    'UPDATE cargo SET nombre = $1,descripcion = $2, WHERE idcargo = $3 RETURNING *';
 
     const {rows} = await query(text,[nombre,descripcion,idcargo]);
     return rows[0];
