@@ -26,29 +26,27 @@ import * as empleadoServices from "../services/empleadosServices.js";
         }
  }
 
- export const updateEmpleado = async (req,res) =>{
-    try{
-       const idempleado = req.params.id;
-       const empleadoData = req.body;
-       const updatedEmpleado = await empleadoServices.updateEmpleado(idempleado,empleadoData);
+ export const updateEmpleado = async (req, res) => {
+    try {
+        const idempleado = req.params.id;
+        const empleadoData = req.body;
+        const updatedEmpleado = await empleadoServices.updateEmpleado(idempleado, empleadoData);
 
-       if(!updatedEmpleado){
-        return res.status(404).json({message: 'Empleado no encontrada'})
-       }
-       res.status(200).json(updatedEmpleado);
-
-    } catch(error)
-        {
-            console.error('ERROR actualizando empleado: ', error)
-            res.status(500).json({ message: 'Internal server ERROR'});
-
+        if (!updatedEmpleado) {
+            return res.status(404).json({ message: 'Empleado no encontrado' });
         }
- }
+
+        res.status(200).json(updatedEmpleado);
+    } catch (error) {
+        console.error('ERROR actualizando empleado: ', error);
+        res.status(500).json({ message: 'Internal server ERROR' });
+    }
+};
 
  export const deleteEmpleado = async (req,res) =>{
     try{
         const idempleado = req.params.id;
-        const deleted = await empleadoServices.deleteCiudad(idempleado);
+        const deleted = await empleadoServices.deleteEmpleado(idempleado);
 
         if (!deleted){
             return res.status(404).json({message: 'empleado  no encontrada'});

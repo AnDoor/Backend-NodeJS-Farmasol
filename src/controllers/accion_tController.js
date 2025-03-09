@@ -45,23 +45,27 @@ import * as AccionTerapeuticaServices from "../services/accion_tServices.js";
         }
  }
 
- export const deleteAccionTerapeutica = async (req,res) =>{
-    try{
-        const idAccionTerapeutica = req.params.id;
-        const deleted = await AccionTerapeuticaServices.deleteAccionTerapeutica(idAccionTerapeutica);
+ export const deleteAccionTerapeutica = async (req, res) => {
+    try {
+      const idAccionTerapeutica = req.params.id; // Aquí estás usando "idAccionTerapeutica"
 
-        if (!deleted){
-            return res.status(404).json({message: 'Accion Terapeutica  no encontrada'});
-        }
-       res.status(200).send();
+      // Verificar que el id no sea undefined o vacío
+      if (!idAccionTerapeutica) {
+        return res.status(400).json({ message: 'ID de Accion Terapeutica no proporcionado' });
+      }
 
-    } catch(err)
-        {
-            console.error('ERROR eliminando Accion Terapeutica: ', err)
-            res.status(500).json({ message: 'Internal server ERROR'});
+      const deleted = await AccionTerapeuticaServices.deleteAccionTerapeutica(idAccionTerapeutica);
+  
+      if (!deleted) {
+        return res.status(404).json({ message: 'Accion Terapeutica no encontrada' });
+      }
 
-        }
- }
+      res.sendStatus(204); // 204 No Content for successful deletion
+    } catch (err) {
+      console.error('ERROR eliminando Accion Terapeutica: ', err);
+      res.status(500).json({ message: 'Internal server ERROR' });
+    }
+};
 
  export const searchAccionTerapeutica = async (req, res) => {
     try {

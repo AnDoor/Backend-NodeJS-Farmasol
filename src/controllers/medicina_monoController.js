@@ -3,8 +3,18 @@ import * as medicinaMonoServices from '../services/medicina_monoServices.js';
 // Crear una relación medicina-monodroga
 export const createMedicinaMono = async (req, res) => {
     try {
-        const { medicina, monodroga } = req.body;
-        const nuevaRelacion = await medicinaMonoServices.createMedicinaMono(medicina, monodroga);
+        // Extraer datos del cuerpo de la solicitud
+        const { medicamentoId, monodrogaId } = req.body;
+
+        // Crear la nueva relación medicina-monodroga
+        const nuevaRelacion = await medicinaMonoServices.createMedicinaMono(medicamentoId, monodrogaId);
+
+        // Si no se pudo crear la relación, devolver un error 404
+        if (!nuevaRelacion) {
+            return res.status(404).json({ message: 'No se pudo crear la relación medicina-monodroga' });
+        }
+
+        // Devolver la nueva relación creada con código 201 (Created)
         res.status(201).json(nuevaRelacion);
     } catch (error) {
         console.error('ERROR al crear relación medicina-monodroga:', error);

@@ -2,8 +2,16 @@ import { query } from "../database.js";
 
 // Crear una relación medicamento-monodroga
 export const createMedicinaMono = async (medicamentoId, monodrogaId) => {
-    const text = 'INSERT INTO medicamento_mono (medicamento, monodroga) VALUES ($1, $2) RETURNING *';
-    const { rows } = await query(text, [medicamentoId, monodrogaId]); // Orden corregido
+    const text = `
+        INSERT INTO medicamento_mono (medicamento_id, monodroga_id)
+        VALUES ($1, $2)
+        RETURNING *
+    `;
+
+    // Ejecuta la consulta con los parámetros en el orden correcto
+    const { rows } = await query(text, [medicamentoId, monodrogaId]);
+
+    // Retorna el primer registro insertado
     return rows[0];
 };
 

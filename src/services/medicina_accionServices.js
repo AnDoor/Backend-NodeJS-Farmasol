@@ -20,9 +20,18 @@ export const getMedicinaAccionById = async (id) => {
 };
 
 // Actualizar una relación medicamento-monodroga
-export const updateMedicinaAccion  = async (id, medicamentoId, accionId) => {
-    const text = 'UPDATE medicamento_accion SET medicamento = $1, accionterapeutica = $2 WHERE id = $3 RETURNING *';
-    const { rows } = await query(text, [medicamentoId, monodrogaId, id]);
+export const updateMedicinaAccion = async (id, medicamentoId, accionId) => {
+    const text = `
+        UPDATE medicamento_accion 
+        SET medicamento = $1, accionterapeutica = $2 
+        WHERE id = $3 
+        RETURNING *
+    `;
+
+    // Ejecuta la consulta con los parámetros correctos
+    const { rows } = await query(text, [medicamentoId, accionId, id]);
+
+    // Retorna el primer registro actualizado
     return rows[0];
 };
 

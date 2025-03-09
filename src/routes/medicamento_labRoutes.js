@@ -9,6 +9,6 @@ router.get('/medicamento_lab', medicinaLaboratorio.getMedicamentoLab); // Obtene
 router.get('/medicamento_lab/:id', medicinaLaboratorio.getMedicamentoLabById); // Obtener por ID
 router.put('/medicamento_lab/:id', medicinaLaboratorio.updateMedicamentoLab); // Actualizar
 router.delete('/medicamento_lab/:id', medicinaLaboratorio.deleteMedicamentoLab); // Eliminar
-
+//router.get('/medicamento_lab/search',medicinaLaboratorio.getMedicamentoLabPorMedicamentoYLaboratorio); //buscar
 
 export default router;

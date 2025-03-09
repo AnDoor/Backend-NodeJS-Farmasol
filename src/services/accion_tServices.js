@@ -19,7 +19,7 @@ export const createAccionTerapeutica = async(AccionTerapeuticaData) =>{
 export const updateAccionTerapeutica = async(AccionTerapeuticaData,idAccionTerapeuticaData) =>{
     try{
         const {nombre,descripcion} = AccionTerapeuticaData;
-        const text = 'UPDATE accion_t SET  nombre = $1, descripcion = $2 WHERE nombre = $3 RETURNING *';
+        const text = 'UPDATE accion_t SET  nombre = $1, descripcion = $2 WHERE id = $3 RETURNING *';
       
         const { rows } = await query(text, [nombre,descripcion, idAccionTerapeuticaData]);
         return rows[0];
@@ -31,17 +31,26 @@ export const updateAccionTerapeutica = async(AccionTerapeuticaData,idAccionTerap
     
     
 }
+export const deleteAccionTerapeutica = async (idAccionTerapeutica) => {
+    try {
+      const { rowCount } = await query('DELETE FROM accion_t WHERE id = $1', [idAccionTerapeutica]);
+      return rowCount > 0;
+    } catch (error) {
+      console.error('Error al eliminar Accion Terapeutica:', error);
+      throw error; // Lanzar el error para que el controlador lo maneje
+    }
+};
 
-export const deleteAccionTerapeutica = async(idLaboratorio) =>{
-    const{rowCount} = await query('DELETE FROM accion_t WHERE CAST(id AS TEXT) = $1 OR nombre =$1',[idLaboratorio]);
-    return rowCount > 0;
-}
 
 export const buscarAccionTerapeutica = async (searchTerm) => {
-    
-    const { rows } = await query(
-        'SELECT * FROM accion_t WHERE nombre ILIKE $1',
-            [`%${searchTerm}%`]
-    );
-    return rows;
-};
+    try {
+      const { rows } = await query(
+        'SELECT * FROM accion_t WHERE nombre ILIKE $1 OR CAST(id AS TEXT) = $2',
+        [`%${searchTerm}%`, searchTerm]
+      );
+      return rows;
+    } catch (error) {
+      console.error('Error searching therapeutic actions:', error);
+      return []; 
+    }
+  };

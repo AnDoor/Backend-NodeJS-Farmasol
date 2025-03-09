@@ -75,3 +75,26 @@ export const deleteMedicamentoLab = async (req, res) => {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+// export const getMedicamentoLabPorMedicamentoYLaboratorio = async (req, res) => {
+//     try {
+//         const medicamento = req.query.medicamento;
+//         const laboratorio = req.query.laboratorio;
+
+//         // Validación de entradas (opcional)
+//         if (!medicamento || !laboratorio) {
+//             return res.status(400).json({ message: 'Se requieren los parámetros medicamento y laboratorio' });
+//         }
+
+//         const resultados = await medicamentoLabServices.buscarMedicamentoLabPorMedicamentoYLaboratorio(medicamento, laboratorio);
+
+//         if (resultados.length === 0) {
+//             return res.status(404).json({ message: 'No se encontraron coincidencias' });
+//         }
+
+//         res.status(200).json(resultados);
+//     } catch (error) {
+//         console.error('Error al obtener medicamento/laboratorio por medicamento y laboratorio:', error);
+//         res.status(500).json({ message: 'Error interno del servidor' });
+//     }
+// };

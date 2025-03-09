@@ -15,8 +15,8 @@ export const getMedicamentoSucursal = async () => {
 
 // Obtener una relación medicamento-sucursal por ID
 export const getMedicamentoSucursalById = async (id) => {
-    const { rows } = await query('SELECT * FROM medicamentostocks WHERE code = $1', [id]);
-    return rows[0];
+    const { rows } = await query('SELECT * FROM medicamentostocks WHERE code = $1 OR sucursal =$1 ', [id]);
+    return rows;
 };
 
 // Actualizar una relación medicamento-sucursal

@@ -16,15 +16,19 @@ export const createCargo = async(cargoData) =>{
 }
 
 
-export const updateCargo = async(cargoData,idcargo) =>{
-    const {nombre,descripcion} = cargoData;
-    const text = 
-    'UPDATE cargo SET nombre = $1,descripcion = $2, WHERE idcargo = $3 RETURNING *';
+export const updateCargo = async (cargoData, idcargo) => {
+    const { nombre, descripcion } = cargoData;
 
-    const {rows} = await query(text,[nombre,descripcion,idcargo]);
-    return rows[0];
+   
+    const text = 
+        'UPDATE cargo SET nombre = $1, descripcion = $2 WHERE idcargo = $3 RETURNING *';
+
     
-}
+    const { rows } = await query(text, [nombre, descripcion, idcargo]);
+
+ 
+    return rows[0];
+};
 
 export const deleteCargo = async(idcargo) =>{
     const{rowCount} = await query('DELETE FROM cargo WHERE idcargo = $1',[idcargo]);
@@ -45,7 +49,9 @@ export const deleteCargo = async(idcargo) =>{
 export const buscarCargo = async (searchTerm) => {
     try {
         const { rows } = await query(
-            'SELECT * FROM cargo WHERE nombre LIKE $1 ',[`%${searchTerm}%`]);
+            'SELECT * FROM cargo WHERE nombre ILIKE $1',
+            [`%${searchTerm}%`] 
+        );
         return rows;
     } catch (err) {
         console.error('ERROR en buscar cargo:', err);
