@@ -18,6 +18,8 @@ import medicamentoLaboratorio from './routes/medicamento_labRoutes.js'
 import pedido from './routes/pedidoRoutes.js'
 import cuenta_pagar from "./routes/cuentaPagarRoutes.js"
 import compra from './routes/compraRoutes.js'
+import sucursal from './routes/sucursalRoutes.js'
+
 const app = express();
 
 const PORT = 4000;
@@ -32,7 +34,8 @@ app.use('/api',
  medicamentoRoutes,monodroga,
  laboratorio,AccionTerapeutica,medicinaMono,
  medicinaAccion, medicamentoSucursal,
- medicamentoLaboratorio, pedido,cuenta_pagar,compra
+ medicamentoLaboratorio, pedido,cuenta_pagar,
+ compra,sucursal
       )
 
  /*Ayuda a ver la velocidad y cuando se realiza una consulta por la terminal */
