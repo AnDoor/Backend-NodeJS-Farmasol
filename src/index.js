@@ -3,21 +3,21 @@ import morgan from 'morgan'
 import cors from 'cors';
 
 /*Rutas de las entidades que tienen CRUD */
-import ciudadRoutes from './routes/ciudadRoutes.js'
-import empleadoRoutes from './routes/empleadosRoutes.js'
-import cargoRoutes from './routes/cargoRoutes.js'
-import empleado_cargo from './routes/empleado_cargoRoutes.js'
-import medicamentoRoutes from './routes/medicamentoRoutes.js'
-import monodroga from './routes/monodrogaRoutes.js'
-import laboratorio from './routes/laboratorioRoutes.js'
-import AccionTerapeutica from './routes/accion_tRoutes.js'
-import medicinaAccion from './routes/medicina_accionRoutes.js'
-import medicinaMono from './routes/medicina_monoRoutes.js'
-import medicamentoSucursal from './routes/medicamento_SucursalRoutes.js'
-import medicamentoLaboratorio from './routes/medicamento_labRoutes.js'
-import pedido from './routes/pedidoRoutes.js'
-import cuenta_pagar from "./routes/cuentaPagarRoutes.js"
-import compra from './routes/compraRoutes.js'
+import ciudadRoutes from '../internal/routes/ciudadRoutes.js'
+import empleadoRoutes from '../internal/routes/empleadosRoutes.js'
+import cargoRoutes from '../internal/routes/cargoRoutes.js'
+import empleado_cargo from '../internal/routes/empleado_cargoRoutes.js'
+import medicamentoRoutes from '../internal/routes/medicamentoRoutes.js'
+import monodroga from '../internal/routes/monodrogaRoutes.js'
+import laboratorio from '../internal/routes/laboratorioRoutes.js'
+import AccionTerapeutica from '../internal/routes/accion_tRoutes.js'
+import medicinaAccion from '../internal/routes/medicina_accionRoutes.js'
+import medicinaMono from '../internal/routes/medicina_monoRoutes.js'
+import medicamentoSucursal from '../internal/routes/medicamento_SucursalRoutes.js'
+import medicamentoLaboratorio from '../internal/routes/medicamento_labRoutes.js'
+import pedido from '../internal/routes/pedidoRoutes.js'
+import cuenta_pagar from "../internal/routes/cuentaPagarRoutes.js"
+import compra from '../internal/routes/compraRoutes.js'
 const app = express();
 
 const PORT = 4000;
@@ -35,10 +35,9 @@ app.use('/api',
  medicamentoLaboratorio, pedido,cuenta_pagar,compra
       )
 
- /*Ayuda a ver la velocidad y cuando se realiza una consulta por la terminal */
 app.use(morgan('dev'))
 
-/* se conecta al puerto del servideor local */
+
 app.listen(PORT, () =>{
     console.log('yes')
 });

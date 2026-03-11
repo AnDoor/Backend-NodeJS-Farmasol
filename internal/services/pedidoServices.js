@@ -1,4 +1,4 @@
-import { query } from "../database.js";
+import { query } from "../../config/database.js";
 
 export const getPedidos = async () => {
   const { rows } = await query("SELECT * FROM pedido");
