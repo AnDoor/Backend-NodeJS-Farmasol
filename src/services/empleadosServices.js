@@ -5,24 +5,40 @@ export const getEmpleado = async() =>{
     return rows;
 }
 
-export const createEmpleado= async(empleadoData) =>{
-    const {idempleado,nombre,apellido,telefono,direccion,email} = empleadoData;
-    const text = 'INSERT INTO empleado (idempleado,nombre,apellido,telefono,direccion,email) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *'
+export const createEmpleado = async (empleadoData) => {
+    const { idempleado, nombre, apellido, telefono, direccion, email } = empleadoData;
 
-    const {rows} = await query(text,[idempleado,nombre,apellido,telefono,direccion,email]);
-    return rows[0];
     
-}
+    const text = `
+        INSERT INTO empleado (idempleado, nombre, apellido, telefono, direccion, email)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *
+    `;
 
+    const { rows } = await query(text, [idempleado, nombre, apellido, telefono, direccion, email]);
 
-export const updateEmpleado = async(idEmpleadoActual,empleadoData) =>{
-    const {idempleado,nombre,apellido,telefono,direccion,email} = empleadoData;
-    const text = 'UPDATE empleado SET nombre= $1,apellido= $2, telefono =$3, direccion =$4,email=$5 WHERE idempleado = $6 RETURNING *'
-
-    const {rows} = await query(text,[idempleado,nombre,apellido,telefono,direccion,email,idEmpleadoActual]);
+    // Retorna el primer registro insertado
     return rows[0];
-    
-}
+};
+
+
+export const updateEmpleado = async (idEmpleadoActual, empleadoData) => {
+    const { nombre, apellido, telefono, direccion, email } = empleadoData;
+
+    // Consulta SQL corregida
+    const text = `
+        UPDATE empleado 
+        SET nombre = $1, apellido = $2, telefono = $3, direccion = $4, email = $5
+        WHERE idempleado = $6
+        RETURNING *
+    `;
+
+    // Ejecuta la consulta con los parámetros en el orden correcto
+    const { rows } = await query(text, [nombre, apellido, telefono, direccion, email, idEmpleadoActual]);
+
+    // Retorna el primer registro actualizado
+    return rows[0];
+};
 
 export const deleteEmpleado = async(idempleado) =>{
     const{rowCount} = await query('DELETE FROM empleado WHERE idempleado = $1',[idempleado]);
