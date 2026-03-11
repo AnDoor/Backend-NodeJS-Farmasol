@@ -8,7 +8,7 @@
 
    **📁 Estructura del proyecto**
 
-```http
+```text
 ├── config/             # configuracion de BD
 ├── internal/
 ├─────internal/handlers # Controladores    
